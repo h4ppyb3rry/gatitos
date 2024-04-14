@@ -1,0 +1,148 @@
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>/ᐠ. .ᐟ\ฅ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+
+<body>
+  <!--barra navegación-->
+  <header>
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'gatos1:principal' %}">
+          <img src="https://i.ibb.co/jMR3gjR/gat-ITOs-1.png" alt="logo" width=auto height=150>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <li class="nav-item">
+              <a class="nav-link ms-3 me-3" href="{% url 'gatos1:principal' %}">INICIO</a>
+            </li>
+            <a class="nav-link ms-3 me-3" href=#>MENÚ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ms-3 me-3" href="{% url 'gatos1:reservaciones' %}">RESERVACIONES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ms-3 me-3" href=#>COMUNIDAD</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link ms-3 me-3" href="#">SOBRE NOSOTROS</a>
+            </li>
+          </ul>
+
+          <span class="navbar-text">
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'users:logout' %}">
+                {% csrf_token %}
+                   <button class="btn btn-link nav-link me-3 ms-3" type="submit">
+                    <h1><i class="bi bi-box-arrow-right d-none d-lg-inline"></i></h1>
+                    <span class="d-lg-none d-md-none">CERRAR SESIÓN</span>
+                   </button>
+            </form>
+              {% else %}
+            <a class="nav-link me-3 ms-3" href="{% url 'users:login' %}">
+              <h1><i class="bi bi-person-circle d-none d-lg-inline"></i></h1>
+              <span class="d-lg-none d-md-none">INGRESAR</span>
+            </a>
+            {% endif %}
+          </span>
+       
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <style>
+    * {
+  font-family: 'Poppins', sans-serif;
+}
+
+#reg1{
+            font-weight: bold;
+        }
+#navbarText {
+  font-weight: bold;
+  font-size: 24px;
+
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+#uno {
+  background-color: white;
+}
+
+#reg,
+h2 {
+  font-weight: bold;
+}
+
+#logo {
+  padding: 2px;
+}
+  </style>
+
+  <main role="main" class="container">
+    <div class="pb-2 mb-1 border-bottom">
+        {% block page_header %} {% endblock page_header %}
+    </div>
+    <div>
+        {% block content %}{% endblock content %}
+    </div>
+</main>
+<footer class="pt-5 pd-4">
+    <div class="container-fluid bg-light border border-black">
+        <div class="row text-center">
+            <div class="col-sm-4 col-lg-4 mt-4">
+                <h id="reg" class="text mb-b font-weight-bold">CONTACTO</h>
+                
+                <p class="mt-4">951 321 1761<br>
+                gat1t05@gmail.com</p>
+            </div>
+
+            <div class="col-sm-4 col-lg-4 mt-4">
+                <h id="reg" class="text mb-b font-weight-bold">DIRECCIÓN</h>
+
+                <p class="mt-4">XXXX XXXX 212, Centro, 68000 <br> Oaxaca de Juárez, Oax.</p>
+            </div>
+
+            <div class="col-sm-4 col-lg-4 mt-4">
+                <h id="reg" class="text mb-b font-weight-bold">REDES SOCIALES</h>
+                <p class="mt-4"></p>
+                <i class="bi bi-instagram" style="font-size: 2rem;"></i>
+                <i class="bi bi-twitter" style="font-size: 2rem;"></i>
+                <i class="bi bi-discord" style="font-size: 2rem;"></i>
+                <i class="bi bi-facebook" style="font-size: 2rem;"></i>
+            </div>   
+            
+
+            <div class="text-center">
+                <p class="mt-4 mb-4" id="reg">DERECHOS RESERVADOS 2023</p>
+            </div>
+        </div>
+
+    </div>
+  </footer>
+</body>
+</html>
+ 

@@ -1,0 +1,57 @@
+{% extends "gatos/barra.html" %}
+{% block content %}
+<div class="container">
+    <h2 class="mb-0">MIS RESERVACIONES</h2>
+<br>
+{% if reservaciones %}
+<section class="row w-75 m-auto text-center" id="tabla">
+    <article class="d-none d-md-block col-md-3 border ">
+        <p><strong>NOMBRE DE LA RESERVACIÓN</strong></p>
+    </article>
+    <article class="d-none d-md-block col-md-3 border">
+        <p><strong>NÚMERO DE PERSONAS</strong></p>
+    </article>
+    <article class="d-none d-md-block col-md-3 border">
+        <p><strong>FECHA</strong></p>
+    </article>
+    <article class="d-none d-md-block col-md-3 border">
+        <p><strong>HORA</strong></p>
+    </article>
+</section>
+{% for reservacion in reservaciones %}
+<div class="row w-75 m-auto border my-3 my-md-0">
+    <article class="col-6 border d-md-none">
+        <p><strong>NOMBRE DE LA RESERVACIÓN</strong></p>
+    </article>
+    <article class="col-6 d-md-block col-md-3 border text-md-center">
+        <p>{{ reservacion.nombre }}</p>
+    </article>
+    <article class="col-6 border d-md-none">
+        <p><strong>NÚMERO DE PERSONAS</strong></p>
+    </article>
+    <article class="col-6 d-md-block col-md-3 border text-md-center">
+        <p>{{ reservacion.numero_personas }}</p>
+    </article>
+
+    <article class="col-6 border d-md-none">
+        <p><strong>FECHA</strong></p>
+    </article>
+    <article class="col-6 d-md-block col-md-3 border text-md-center">
+        <p>{{ reservacion.fecha }}</p>
+    </article>
+    <article class="col-6 border d-md-none">
+        <p><strong>HORA</strong></p>
+    </article>
+    <article class="col-6 d-md-block col-md-3 border text-md-center">
+        <p>{{ reservacion.hora }}</p>
+    </article>
+</div>
+{% endfor %}
+    {% else %}
+        <p class="mt-0"><b>{{ usuario }}</b>, no tienes reservaciones registradas por el momento.</p>
+        <a href="{% url 'gatos1:reservaciones' %}" class="btn btn-outline-dark"">RESERVAR</a>
+    {% endif %}
+
+</div>
+
+{% endblock content %}

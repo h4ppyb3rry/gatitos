@@ -1,0 +1,48 @@
+{% extends "gatos/barra.html" %}
+{% load django_bootstrap5 %}
+{% block page_header %}
+    <p class="h1 text-center mt-5" id="reg1">INICIO DE SESIÓN</p>
+{% endblock page_header %}
+
+{% block content %}
+{% if form.errors %}
+<p class="errors">Tu nombre de usuario y contraseña no coinciden.
+    Por favor intenta de nuevo</p> 
+{% endif %}
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+          <!--login -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-header text-center" id="uno">
+                  <img src="https://i.ibb.co/jMR3gjR/gat-ITOs-1.png" alt="logo" id="logo" width=auto height=150>
+              </div>
+              <div class="card-body text-center">
+                <form method="post" action="{% url 'users:login' %}" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% block buttons %}
+                  <button type="submit" class="btn btn-outline-dark">INGRESAR</button>
+                  {% endblock buttons %}
+                  <input type="hidden" name="next" value="{% url 'gatos1:principal' %}" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="row justify-content-center">
+          <!--registro-->
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body text-center">
+                <p id="reg">¿AÚN NO ERES PARTE DE LA COMUNIDAD?</p>
+                <a href="{% url 'users:register' %}" class="btn btn-outline-dark"">UNIRME</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endblock content %}
+     

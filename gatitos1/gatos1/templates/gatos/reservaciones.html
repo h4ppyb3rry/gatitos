@@ -1,0 +1,328 @@
+{% extends "gatos/barra.html" %}
+{% block page_header %}
+<h2 id="reg" class="text-center">RESERVACIONES!✦</h2>
+<div class="container mt-0 p-4">
+    <div class="row justify-content-center">
+        <!--Comunidad -->
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-lg-4">
+                    <!--Calendario-->
+                    <div class="container">
+                        <div class="calendar">
+                            <div class="header">
+                                <div class="month">July 2021</div>
+                                <div class="btns">
+                                    <!-- today -->
+                                    <div class="btn today">
+                                        <i class="fas fa-calendar-day"></i>
+                                    </div>
+                                    <!-- previous month -->
+                                    <div class="btn prev">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </div>
+                                    <!-- next month -->
+                                    <div class="btn next">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="weekdays">
+                                <div class="day">Sun</div>
+                                <div class="day">Mon</div>
+                                <div class="day">Tue</div>
+                                <div class="day">Wed</div>
+                                <div class="day">Thu</div>
+                                <div class="day">Fri</div>
+                                <div class="day">Sat</div>
+                            </div>
+                            <div class="days">
+                                <!-- render days with js -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card mt-5">
+                        <div class="card-body text-center">
+                            <form  method="POST" action="{% url 'gatos1:reservaciones' %}" >
+                              {% csrf_token %}
+                              <div class="form-group">
+                                <label for="nombre">NOMBRE DE LA RESERVACIÓN</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            </div>
+                            <br>
+                                <div class="form-group">
+                                    <label for="num">NÚMERO DE PERSONAS</label>
+                                    <input type="number" class="form-control" id="num" name="numero_personas" required min="1" max="20">
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                  <label for="fecha">FECHA</label>
+                                  <input type="date" class="form-control" id="fecha" name="fecha" min="" required>
+                              </div>
+                              <br>
+                              <div class="form-group">
+                                <label for="hora">HORA</label>
+                                <input type="time" class="form-control" id="hora" name="hora" required min="11:00" max="18:00">
+                            </div>
+                            <br>
+                                <button type="submit" class="btn btn-outline-dark">SOLICITAR</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                      <!--mis reservaciones-->
+                      <div class="mt-3 col-12">
+                        <div class="card">
+                          <div class="card-body text-center">
+                            <p id="reg">¿YA TIENES UNA RESERVACIÓN?</p>
+                            <a href="{% url 'gatos1:misreservaciones' %}" class="btn btn-outline-dark"">MIS RESERVACIONES</a>
+                          </div>
+                        </div>
+                      </div>
+                    
+                </div>
+
+
+                <div class="col-sm-6 col-md-12 col-lg-4">
+                    <div class="card bg-light mt-3" style="width: 15rem;">
+                        <div class="card-body text-center">
+                            <h5 id="reg">PASOS PARA AGENDAR!</h5>
+                            <p class="card-text">1. Selecciona el día para tu reservación<br>
+                                2. Ingresa el número de personas que asistirán<br>
+                                3. Selecciona el horario que más se te acomode<br>
+                                4. Solicita la reservación y espera la confirmación via correo electrónico</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+#reg,
+h2 {
+  font-weight: bold;
+}
+
+
+:root {
+  --primary-color: #000000;
+  --text-color: #1d1d1d;
+  --bg-color: #DDDDDD;
+}
+
+.calendar {
+  width: 100%;
+  height: auto;
+  max-width: 700px;
+  background: var(--bg-color);
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+.calendar .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+}
+.calendar .header .month {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.calendar .header .btns {
+  display: flex;
+  gap: 10px;
+}
+.calendar .header .btns .btn {
+  width: 50px;
+  height: 40px;
+  background: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.calendar .header .btns .btn:hover {
+  background: #000000;
+  transform: scale(1.05);
+}
+.calendar .weekdays {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.calendar .weekdays .day {
+  width: calc(100% / 7 - 10px);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.calendar .days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.calendar .days .day {
+  width: calc(100% / 7 - 10px);
+  height: 50px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-color);
+  transition: all 0.3s;
+  user-select: none;
+}
+.calendar .days .day:not(.next):not(.prev):hover {
+  color: #fff;
+  background: var(--primary-color);
+  transform: scale(1.05);
+}
+.calendar .days .day.next,
+.calendar .days .day.prev {
+  color: #ccc;
+}
+.calendar .days .day.today {
+  color: #fff;
+  background: var(--primary-color);
+}
+.credits a {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: #aaa;
+}
+.credits span {
+  color: var(--primary-color);
+}
+</style>
+
+<script>
+var fechaActual = new Date().toISOString().split('T')[0];
+document.getElementById('fecha').min = fechaActual;
+
+const daysContainer = document.querySelector(".days");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+const todayBtn = document.querySelector(".today");
+const month = document.querySelector(".month");
+
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const date = new Date();
+let currentMonth = date.getMonth();
+let currentYear = date.getFullYear();
+
+const renderCalendar = () => {
+  date.setDate(1);
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+  const lastDayIndex = lastDay.getDay();
+  const lastDayDate = lastDay.getDate();
+  const prevLastDay = new Date(currentYear, currentMonth, 0);
+  const prevLastDayDate = prevLastDay.getDate();
+  const nextDays = 7 - lastDayIndex - 1;
+
+  month.innerHTML = `${months[currentMonth]} ${currentYear}`;
+
+  let days = "";
+
+  for (let x = firstDay.getDay(); x > 0; x--) {
+    days += `<div class="day prev">${prevLastDayDate - x + 1}</div>`;
+  }
+
+  for (let i = 1; i <= lastDayDate; i++) {
+    if (
+      i === new Date().getDate() &&
+      currentMonth === new Date().getMonth() &&
+      currentYear === new Date().getFullYear()
+    ) {
+      days += `<div class="day today">${i}</div>`;
+    } else {
+      days += `<div class="day">${i}</div>`;
+    }
+  }
+
+  for (let j = 1; j <= nextDays; j++) {
+    days += `<div class="day next">${j}</div>`;
+  }
+
+  daysContainer.innerHTML = days;
+  hideTodayBtn();
+};
+
+nextBtn.addEventListener("click", () => {
+  currentMonth++;
+  if (currentMonth > 11) {
+    currentMonth = 0;
+    currentYear++;
+  }
+  renderCalendar();
+});
+
+prevBtn.addEventListener("click", () => {
+  currentMonth--;
+  if (currentMonth < 0) {
+    currentMonth = 11;
+    currentYear--;
+  }
+  renderCalendar();
+});
+
+todayBtn.addEventListener("click", () => {
+  currentMonth = date.getMonth();
+  currentYear = date.getFullYear();
+  renderCalendar();
+});
+
+function hideTodayBtn() {
+  if (
+    currentMonth === new Date().getMonth() &&
+    currentYear === new Date().getFullYear()
+  ) {
+    todayBtn.style.display = "none";
+  } else {
+    todayBtn.style.display = "flex";
+  }
+}
+
+renderCalendar();
+
+
+
+
+</script>
+
+{% endblock page_header %}
